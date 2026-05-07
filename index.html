@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Undangan</title>
+
+<style>
+body{
+  margin:0;
+  height:200vh;
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  font-family:sans-serif;
+  background:#f5f5f5;
+}
+
+#openBtn{
+  margin-top:100px;
+  padding:14px 28px;
+  border:none;
+  border-radius:12px;
+  background:#b48a5a;
+  color:white;
+  font-size:20px;
+  cursor:pointer;
+}
+
+#musicControl{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  z-index:9999;
+  display:none;
+}
+
+#musicControl button{
+  width:55px;
+  height:55px;
+  border:none;
+  border-radius:50%;
+  background:#b48a5a;
+  color:white;
+  font-size:20px;
+  cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<button id="openBtn">
+Buka Undangan
+</button>
+
+<audio id="bgMusic" loop>
+  <source src="musik.mp3" type="audio/mpeg">
+</audio>
+
+<div id="musicControl">
+  <button id="toggleMusic">⏸</button>
+</div>
+
+<script>
+const openBtn = document.getElementById("openBtn");
+const music = document.getElementById("bgMusic");
+const musicControl = document.getElementById("musicControl");
+const toggleBtn = document.getElementById("toggleMusic");
+
+openBtn.addEventListener("click", async () => {
+
+  await music.play();
+
+  musicControl.style.display = "block";
+
+  window.scrollTo({
+    top: window.innerHeight,
+    behavior: "smooth"
+  });
+
+  openBtn.style.display = "none";
+});
+
+toggleBtn.addEventListener("click", () => {
+
+  if(music.paused){
+    music.play();
+    toggleBtn.innerHTML = "⏸";
+  } else {
+    music.pause();
+    toggleBtn.innerHTML = "▶";
+  }
+
+});
+</script>
+
+</body>
+</html>
